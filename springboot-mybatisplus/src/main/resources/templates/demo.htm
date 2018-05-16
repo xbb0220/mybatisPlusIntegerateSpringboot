@@ -1,0 +1,42 @@
+<#include "/include.htm">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>全民素养测评系统</title>
+</head>
+<body>
+<form method="POST" enctype="multipart/form-data" action="${base}/expert/save">
+<table>
+	<tr>
+		<td>名字:</td>
+		<td>
+			<input type="text" name="name"  style="width:180px"  >
+		</td>
+	</tr>
+	
+	<tr>
+		<td>职称:</td>
+		<td>
+			<input type="text" name="jobTitle"  style="width:180px" >
+		</td>
+	</tr>
+	<tr>
+		<td>头像:</td>
+		<td>
+			<input type="file" name="headPortrait"  style="width:180px" >
+		</td>
+	</tr>
+		<tr>
+		<td><input type="submit" value="保存" ></td>
+		<td>
+			<input type="reset" value="重置" >
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>
+
+
+

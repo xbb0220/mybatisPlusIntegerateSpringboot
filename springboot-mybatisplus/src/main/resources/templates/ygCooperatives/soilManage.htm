@@ -1,0 +1,106 @@
+<#include "/include.htm"/>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>土地肥力管理</title>
+        <link rel="stylesheet" type="text/css" href="/css/default/easyui.css">
+        <link rel="stylesheet" type="text/css" href="/css/moreIcons/IconExtension.css">
+        <link rel="stylesheet" type="text/css" href="/css/icon.css">
+        <link rel="stylesheet" type="text/css" href="/css/animate.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/iconfont/iconfont.css">
+        <link rel="stylesheet" type="text/css" href="/css/rf.css">
+        <script type="text/javascript" src="/js/lib/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/lib/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="/js/lib/easyui-lang-zh_CN.js"></script>
+        <script type="text/javascript" src="/js/plugin.js"></script>
+    </head>
+    <body>
+    <table id="soilManageGrid"></table>
+    <div id="soilManageSaveWin" title="添加土壤肥力" class="easyui-window" style="width:300px;height:255px;padding:5px;" data-options="closed:true,footer:'#ft1'">
+        <form id="saveSoilManageForm" style="padding:10px 20px 10px 40px;">
+            <input type="text" name="id" class="hide">
+            <table>
+                <tr>
+                    <td>合作社:</td>
+                    <td><input type="text" name="cooperativesId" class="cooperativesId"></td>
+                </tr>
+                <tr>
+                    <td>氮:</td>
+                    <td><input type="text" name="nitrogen" class="easyui-numberbox"></td>
+                </tr>
+                <tr>
+                    <td>磷:</td>
+                    <td><input type="text" name="phosphorus" class="easyui-numberbox"></td>
+                </tr>
+                <tr>
+                    <td>钾:</td>
+                    <td><input type="text" name="potassium" class="easyui-numberbox"></td>
+                </tr>
+                <tr>
+                    <td>年份:</td>
+                    <td><input type="text" name="year" class="easyui-numberbox"></td>
+                </tr>
+            </table>
+        </form>
+        <div id="ft1" style="padding: 5px; text-align: right;">
+            <a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="saveSoilManage()">保存</a>&nbsp
+            <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="closeSaveSoilManageWin()">取消</a>
+        </div>
+    </div>
+
+    <div id="soilManageGridToolBar">
+        <form id="queryForm">
+            <table>
+                <tr>
+                    <td>
+                        <span>合作社名字:<input name="cooperativesId" class="cooperativesId"></span>
+                        <span>年份:<input name="year" class="easyui-numberbox"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-search" onclick="searchSoilManage()">查询</a>
+                        <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-add" onclick="openSaveSoilManageWin()">添加</a>
+                        <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-edit" onclick="openUpdateSoilManageWin()">修改</a>
+                        <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-cancel" onclick="deleteSoilManage()">删除</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div id="soilManageUpdateWin" title="更新土壤肥力" class="easyui-window" style="width:300px;height:255px;padding:5px;" data-options="closed:true,footer:'#ft2'">
+        <form id="updateSoilManageForm" style="padding:10px 20px 10px 40px;">
+            <input type="text" name="id" class="hide">
+            <table>
+                <tr>
+                    <td>合作社:</td>
+                    <td><input type="text" name="cooperativesId" class="cooperativesId" disabled="disabled"></td>
+                </tr>
+                <tr>
+                    <td>氮:</td>
+                    <td><input type="text" name="nitrogen" class="easyui-numberbox"></td>
+                </tr>
+                <tr>
+                    <td>磷:</td>
+                    <td><input type="text" name="phosphorus" class="easyui-numberbox"></td>
+                </tr>
+                <tr>
+                    <td>钾:</td>
+                    <td><input type="text" name="potassium" class="easyui-numberbox"></td>
+                </tr>
+                <tr>
+                    <td>年份:</td>
+                    <td><input type="text" name="year" class="easyui-numberbox" disabled="disabled"></td>
+                </tr>
+            </table>
+        </form>
+        <div id="ft2" style="padding: 5px; text-align: right;">
+            <a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="updateSoilManage()">保存</a>&nbsp
+            <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="closeUpdateSoilManageWin()">取消</a>
+        </div>
+    </div>
+    </body>
+    <script type="text/javascript" src="/script/ygCooperatives/soilManage.js"></script>
+</html>

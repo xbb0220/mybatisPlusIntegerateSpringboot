@@ -1,0 +1,185 @@
+<#include "/include.htm"/>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>合作社信息管理</title>
+    <link rel="stylesheet" type="text/css" href="/css/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/css/moreIcons/IconExtension.css">
+    <link rel="stylesheet" type="text/css" href="/css/icon.css">
+    <link rel="stylesheet" type="text/css" href="/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/iconfont/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/css/rf.css">
+    <script type="text/javascript" src="/js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/lib/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/js/lib/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="/js/plugin.js"></script>
+    <script type="text/javascript">
+    		var base = '${base}';
+    </script>
+</head> 
+<body>
+<table id="cooperativesGrid"></table>
+<div id="cooperativesSaveWin" title="合作社信添加" class="easyui-window" style="width:380px;height:500px;padding:5px;" data-options="closed:true,footer:'#ft1'">
+    <form id="saveCooperativesForm" style="padding:10px 20px 10px 40px;">
+        <input type="text" name="id" class="hide">
+        <table>
+            <tr>
+                <td>合作社名称:</td>
+                <td><input type="text" name="name" class="easyui-textbox" data-options="required:true"></td>
+            </tr>
+            <tr>
+                <td>合作社位置:</td>
+                <td><input type="text" name="position" class="easyui-textbox"></td>
+            </tr>
+            <tr>
+                <td>传感器数量:</td>
+                <td><input type="text" name="sensorNum" class="easyui-numberbox"></td>
+            </tr>
+            <tr>
+                <td>土地编号:</td>
+                <td><input type="text" name="landNum" class="easyui-textbox"></td>
+            </tr>
+            <tr>
+                <td>农户数量:</td>
+                <td><input type="text" name="farmerNum" class="easyui-numberbox"></td>
+            </tr>
+            <tr>
+                <td>标准空气温度:</td>
+                <td><input type="text" name="standardAirTem" class="easyui-numberbox"></td>
+            </tr>
+            <tr>
+                <td>标准降雨量:</td>
+                <td><input type="text" name="standardRainfall" class="easyui-numberbox"></td>
+            </tr>
+            <tr>
+                <td>标准光照度:</td>
+                <td><input type="text" name="standardLight" class="easyui-numberbox"></td>
+            </tr>
+            <tr>
+                <td>标准土壤温度:</td>
+                <td><input type="text" name="standardSoilTem" class="easyui-numberbox"></td>
+            </tr>
+            <tr>
+                <td>经营类型:</td>
+                <td><input type="text" name="manageType" class="easyui-combobox" data-options="valueField:'code',textField:'name',url:'${base}/dict/cooperativeManageType'">
+                </td>
+            </tr>
+            <tr>
+                <td>建设状况:</td>
+                <td><input type="text" name="buildState" class="easyui-combobox" data-options="valueField:'code',textField:'name',url:'${base}/dict/cooperativeBuidState'">
+                </td>
+            </tr>
+            <tr>
+                <td>合作社荣誉:</td>
+                <td><input type="text" name="honor" class="easyui-textbox"></td>
+            </tr>
+        </table>
+    </form>
+    <div id="ft1" style="padding: 5px; text-align: right;">
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="saveCooperatives()">保存</a>&nbsp
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel"
+           onclick="closeSaveCooperativesWin()">取消</a>
+    </div>
+</div>
+
+<div id="cooperativesGridToolBar">
+    <form id="queryForm">
+        <table>
+            <tr>
+            <td>
+                <span>土地编号:<input name="landNum" class="easyui-textbox"></span>
+                <span>合作社名称:<input name="id" class="easyui-textbox id"></span>
+                <span>经营类型:<input name="manageType" class="easyui-combobox" data-options="valueField:'code',textField:'name',url:'${base}/dict/cooperativeManageType'"></span>
+                <span>建设状况:<input name="buildState" class="easyui-combobox" data-options="valueField:'code',textField:'name',url:'${base}/dict/cooperativeBuidState'"></span>
+            </td>
+            </tr>
+            <tr>
+                <td>
+                <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-search" onclick="doSearch()">查询</a>
+                <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-add" onclick="openSaveCooperativeWin()">添加</a>
+                <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-edit" onclick="openUpdateCooperativeWin()">修改</a>
+                <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-cancel" onclick="deleteCooperatives()">删除</a>
+                <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-edit" onclick="openUpdateCooperativeCoordinate()">修改坐标</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div id="cooperativesUpdateWin" title="合作社信息更新" class="easyui-window" style="width:380px;height:500px;padding:5px;" data-options="closed:true,footer:'#ft2'">
+    <form id="updateCooperativesForm" style="padding:10px 20px 10px 40px;">
+        <input type="text" name="id" class="hide">
+        <table>
+            <tr>
+                <td>合作社名称:</td>
+                <td><input type="text" name="name" class="easyui-textbox" readonly="readonly" disabled="disabled"/></td>
+            </tr>
+            <tr>
+                <td>合作社位置:</td>
+                <td><input type="text" name="position" class="easyui-textbox"></td>
+            </tr>
+            <tr>
+                <td>传感器数量:</td>
+                <td><input type="text" name="sensorNum" class="easyui-textbox"></td>
+            </tr>
+            <tr>
+                <td>土地编号:</td>
+                <td><input type="text" name="landNum" class="easyui-textbox"></td>
+            </tr>
+            <tr>
+                <td>农户数量:</td>
+                <td><input type="text" name="farmerNum" class="easyui-textbox"></td>
+            </tr>
+            <tr>
+                <td>标准空气温度:</td>
+                <td><input type="text" name="standardAirTem" class="easyui-textbox"></td>
+            </tr>
+            <tr>
+                <td>标准降雨量:</td>
+                <td><input type="text" name="standardRainfall" class="easyui-textbox"></td>
+            </tr>
+            <tr>
+                <td>标准光照度:</td>
+                <td><input type="text" name="standardLight" class="easyui-textbox"></td>
+            </tr>
+            <tr>
+                <td>经营类型:</td>
+                <td><input type="text" name="manageType" class="easyui-combobox"
+                           data-options="valueField:'code',textField:'name',url:'${base}/dict/cooperativeManageType'">
+                </td>
+            </tr>
+            <tr>
+                <td>建设状况:</td>
+                <td><input type="text" name="buildState" class="easyui-combobox"
+                           data-options="valueField:'code',textField:'name',url:'${base}/dict/cooperativeBuidState'">
+                </td>
+            </tr>
+            <tr>
+                <td>合作社荣誉:</td>
+                <td><input type="text" name="honor" class="easyui-textbox"></td>
+            </tr>
+            <tr>
+                <td>标准土壤温度:</td>
+                <td><input type="text" name="standardSoilTem" class="easyui-textbox"></td>
+            </tr>
+        </table>
+    </form>
+    <div id="ft2" style="padding: 5px; text-align: right;">
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="updateCooperatives()">保存</a>&nbsp
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="closeUpdateCooperativesWin()">取消</a>
+    </div>
+</div>
+
+<div id="cooperativeCoordinateWin" title="修改合作社坐标信息" class="easyui-window" style="width:420px;height:500px;padding:5px;" data-options="closed:true,footer:'#ft3'">
+    <form id="coordinateJsonForm">
+        <input type="text" name="coordinateJson" class="easyui-textbox" data-options="required:true, multiline:true" style="width:380px;height:650px;padding:5px;">
+    </form>
+    <div id="ft3" style="padding: 5px; text-align: right;">
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="updateCooperativeCoordinateJson()">确定</a>&nbsp
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="closeCooperativeCoordinateWin()">取消</a>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="/script/ygCooperatives/cooperatives.js"></script>
+</html>

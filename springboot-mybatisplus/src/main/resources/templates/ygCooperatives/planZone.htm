@@ -1,0 +1,128 @@
+<#include "/include.htm"/>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>种植区（设备）管理</title>
+    <link rel="stylesheet" type="text/css" href="/css/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/css/moreIcons/IconExtension.css">
+    <link rel="stylesheet" type="text/css" href="/css/icon.css">
+    <link rel="stylesheet" type="text/css" href="/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/iconfont/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/css/rf.css">
+    <script type="text/javascript" src="/js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/lib/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/js/lib/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="/js/plugin.js"></script>
+    <script type="text/javascript">
+        var base = '${base}';
+    </script>
+</head>
+<body>
+<table id="plantingZoneGrid"></table>
+<div id="plantingZoneSaveWin" title="添加种植区" class="easyui-window" style="width:380px;height:500px;padding:5px;"
+     data-options="closed:true,footer:'#ft1'">
+    <form id="savePlantingZoneForm" style="padding:10px 20px 10px 40px;">
+        <input type="text" name="id" class="hide">
+        <table>
+            <tr>
+                <td>合作社:</td>
+                <td><input type="text" name="cooperativesId" class="cooperativesId" data-options="required:true"></td>
+            </tr>
+            <tr>
+                <td>监控半径:</td>
+                <td><input type="text" name="radius" class="easyui-numberbox"></td>
+            </tr>
+            <tr>
+                <td>经度:</td>
+                <td><input type="text" name="longitude" class="easyui-numberbox" data-options="precision:20"></td>
+            </tr>
+            <tr>
+                <td>纬度:</td>
+                <td><input type="text" name="latitude" class="easyui-numberbox" data-options="precision:20"></td>
+            </tr>
+            <tr>
+                <td>种植区（设备）类型:</td>
+                <td><input type="text" name="type" class="easyui-combobox" data-options="valueField:'code',required:true,textField:'name',url:'${base}/dict/plantingZoneType'">
+                </td>
+            </tr>
+            <tr>
+                <td>状态:</td>
+                <td><input type="text" name="status" class="easyui-combobox" data-options="valueField:'code',required:true,textField:'name',url:'${base}/dict/plantingZoneStatus'">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div id="ft1" style="padding: 5px; text-align: right;">
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="savePlantingZone()">保存</a>&nbsp
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="closeSavePlantingZoneWin()">取消</a>
+    </div>
+</div>
+
+<div id="plantingZoneGridToolBar">
+    <form id="queryForm">
+        <table>
+            <tr>
+                <td>
+                    <span>合作社名字:<input name="cooperativesId" class="cooperativesId"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-search"
+                       onclick="searchPlantingZone()">查询</a>
+                    <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-add"
+                       onclick="openSavePlantingZoneWin()">添加</a>
+                    <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-edit"
+                       onclick="openUpdatePlantingZoneWin()">修改</a>
+                    <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-cancel"
+                       onclick="deletePlantingZone()">删除</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div id="plantingZoneUpdateWin" title="更新种植区" class="easyui-window" style="width:380px;height:500px;padding:5px;"
+     data-options="closed:true,footer:'#ft2'">
+    <form id="updatePlantingZoneForm" style="padding:10px 20px 10px 40px;">
+        <input type="text" name="id" class="hide">
+        <table>
+            <tr>
+                <td>合作社:</td>
+                <td><input type="text" name="cooperativesId" class="cooperativesId" disabled="disabled"></td>
+            </tr>
+            <tr>
+                <td>监控半径:</td>
+                <td><input type="text" name="radius" class="easyui-numberbox"></td>
+            </tr>
+            <tr>
+                <td>经度:</td>
+                <td><input type="text" name="longitude" class="easyui-numberbox" data-options="precision:20"></td>
+            </tr>
+            <tr>
+                <td>纬度:</td>
+                <td><input type="text" name="latitude" class="easyui-numberbox" data-options="precision:20"></td>
+            </tr>
+            <tr>
+                <td>种植区（设备）类型:</td>
+                <td><input type="text" name="type" class="easyui-combobox" data-options="valueField:'code',textField:'name',url:'${base}/dict/plantingZoneType'">
+                </td>
+            </tr>
+            <tr>
+                <td>状态:</td>
+                <td><input type="text" name="status" class="easyui-combobox" data-options="valueField:'code',textField:'name',url:'${base}/dict/plantingZoneStatus'">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div id="ft2" style="padding: 5px; text-align: right;">
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="updatePlantingZone()">保存</a>&nbsp
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel"
+           onclick="closeUpdatePlantingZoneWin()">取消</a>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="/script/ygCooperatives/plantingZone.js"></script>
+</html>

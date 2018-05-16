@@ -1,0 +1,120 @@
+<#include "/include.htm">
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>气象信息管理</title>
+		<link rel="stylesheet" type="text/css" href="/css/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="/css/moreIcons/IconExtension.css">
+		<link rel="stylesheet" type="text/css" href="/css/icon.css">
+		<link rel="stylesheet" type="text/css" href="/css/animate.min.css">
+		<link rel="stylesheet" type="text/css" href="/css/iconfont/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="/css/rf.css">
+		<script type="text/javascript" src="/js/lib/jquery.min.js"></script>
+		<script type="text/javascript" src="/js/lib/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="/js/lib/easyui-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="/js/plugin.js"></script>
+	</head>
+	<body>
+		<table id="natureCollectGrid"></table>
+		<div id="saveNatureCollectWin" title="添加气象信息" class="easyui-window" style="width:300px;height:400px;padding:5px;" data-options="closed:true,footer:'#ft1'">
+			<form id="saveNatureCollectForm" style="padding:10px 20px 10px 40px;">
+				<input type="text" name="id" class="hide">
+				<table>
+					<tr>
+						<td>合作社名字:</td><td><input type="text" name="cooperativesId" class="cooperativesId"></td>
+					</tr>
+					<tr>
+						<td>风速:</td><td><input type="text" name="speed" class="easyui-textbox" data-options="required:true"></td>
+					</tr>
+					<tr>
+						<td>风向:</td><td><input type="text" name="direction" class="easyui-textbox"></td>
+					</tr>
+					<tr>
+						<td>降雨量:</td><td><input type="text" name="rainfall" class="easyui-textbox"></td>
+					</tr>
+					<tr>
+						<td>空气温度:</td><td><input type="text" name="airTemperature" class="easyui-textbox"></td>
+					</tr>
+					<tr>
+						<td>土壤温度:</td><td><input type="text" name="soilTemperature" class="easyui-textbox"></td>
+					</tr>
+					<tr>
+						<td>光照:</td><td><input type="text" name="light" class="easyui-textbox"></td>
+					</tr>
+					<tr>
+						<td>空气湿度:</td><td><input type="text" name="airHumidity" class="easyui-textbox"></td>
+					</tr>
+					<tr>
+						<td>土壤湿度:</td><td><input type="text" name="soilHumidity" class="easyui-textbox"></td>
+					</tr>
+				</table>
+			</form>
+			<div id="ft1" style="padding: 5px; text-align: right;">
+				<a href="#" class="easyui-linkbutton" plian="true" icon="icon-ok" id="saveNatureCollectSbmt" onclick="saveNatureCollect()">确定</a>
+				<a href="#" class="easyui-linkbutton" plian="true" icon="icon-ok" id="closeSaveNatureCollectSbmt" onclick="closeSaveNatureCollectWin()">取消</a>
+			</div>
+		</div>
+
+		<div id="updateNatureCollectWin" title="更新气象信息" class="easyui-window" style="width:300px;height:400px;padding:5px;" data-options="closed:true,footer:'#ft2'">
+			<form id="updateNatureCollectForm" style="padding:10px 20px 10px 40px;">
+				<input type="text" name="id" class="hide">
+				<table>
+					<tr>
+						<td>合作社名字:</td><td><input type="text" name="cooperativesId" class="cooperativesId"></td>
+					</tr>
+					<tr>
+						<td>风速:</td><td><input type="text" name="speed" class="easyui-textbox" data-options="required:true"></td>
+					</tr>
+					<tr>
+						<td>风向:</td><td><input type="text" name="direction" class="easyui-textbox"></td>
+					</tr>
+					<tr>
+						<td>降雨量:</td><td><input type="text" name="rainfall" class="easyui-textbox"></td>
+					</tr>
+					<tr>
+						<td>空气温度:</td><td><input type="text" name="airTemperature" class="easyui-textbox"></td>
+					</tr>
+					<tr>
+						<td>土壤温度:</td><td><input type="text" name="soilTemperature" class="easyui-textbox"></td>
+					</tr>
+					<tr>
+						<td>光照:</td><td><input type="text" name="light" class="easyui-textbox"></td>
+					</tr>
+					<tr>
+						<td>空气湿度:</td><td><input type="text" name="airHumidity" class="easyui-textbox"></td>
+					</tr>
+					<tr>
+						<td>土壤湿度:</td><td><input type="text" name="soilHumidity" class="easyui-textbox"></td>
+					</tr>
+				</table>
+			</form>
+			<div id="ft2" style="padding: 5px; text-align: right;">
+				<a href="#" class="easyui-linkbutton" plian="true" icon="icon-ok" id="updateNatureCollectSbmt" onclick="updateNatureCollect()">确定</a>
+				<a href="#" class="easyui-linkbutton" plian="true" icon="icon-ok" id="closeUpdateNatureCollectSbmt" onclick="closeUpdateNatureCollectWin()">取消</a>
+			</div>
+		</div>
+
+		<div id="natureCollectGridToolBar">
+			<form id="queryForm">
+				<table>
+					<tr>
+						<td>
+							<span>合作社名字:<input name="cooperativesId" class="cooperativesId"></span>
+							<span>时间:<input name="createTime" class="easyui-datebox"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-search" onclick="searchNatureCollect()">搜索</a>
+							<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-add" onclick="openSaveNatureCollectWin()">添加</a>
+							<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-edit" onclick="openUpdateNatureCollectWin()">修改</a>
+							<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-cancel" onclick="deleteNatureCollect()">删除</a>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</body>
+	<script type="text/javascript" src="/script/ygCooperatives/natureCollect.js"></script>
+</html>
