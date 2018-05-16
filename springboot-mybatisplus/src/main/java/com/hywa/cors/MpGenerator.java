@@ -86,11 +86,11 @@ public class MpGenerator {
 		// 自定义 mapper 父类
 		// strategy.setSuperMapperClass("com.baomidou.demo.TestMapper");
 		// 自定义 service 父类
-		// strategy.setSuperServiceClass("com.baomidou.demo.TestService");
+		strategy.setSuperServiceClass("com.hywa.cors.service.BaseService");
 		// 自定义 service 实现类父类
-		// strategy.setSuperServiceImplClass("com.baomidou.demo.TestServiceImpl");
+		strategy.setSuperServiceImplClass("com.hywa.cors.service.impl.BaseServiceImpl");
 		// 自定义 controller 父类
-		// strategy.setSuperControllerClass("com.baomidou.demo.TestController");
+		strategy.setSuperControllerClass("com.hywa.cors.web.BaseController");
 		// 【实体】是否生成字段常量（默认 false）
 		// public static final String ID = "test_id";
 		// strategy.setEntityColumnConstant(true);

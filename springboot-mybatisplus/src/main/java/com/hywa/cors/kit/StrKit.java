@@ -53,6 +53,37 @@ public class StrKit {
     final static char[] UPPER_LIST = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
     /**
+	 * 字符串为 null 或者内部字符全部为 ' ' '\t' '\n' '\r' 这四类字符时返回 true
+	 */
+	public static boolean isBlank(String str) {
+		if (str == null) {
+			return true;
+		}
+		int len = str.length();
+		if (len == 0) {
+			return true;
+		}
+		for (int i = 0; i < len; i++) {
+			switch (str.charAt(i)) {
+			case ' ':
+			case '\t':
+			case '\n':
+			case '\r':
+			// case '\b':
+			// case '\f':
+				break;
+			default:
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public static boolean notBlank(String str) {
+		return !isBlank(str);
+	}
+    
+    /**
      * 身份证验证
      *@param  certNo 号码内容
      *@return 是否有效 null和"" 都是false
@@ -141,6 +172,32 @@ public class StrKit {
         return fileName.substring(0, pointIndex);
     }
 
+    /**
+	 * 首字母变小写
+	 */
+	public static String firstCharToLowerCase(String str) {
+		char firstChar = str.charAt(0);
+		if (firstChar >= 'A' && firstChar <= 'Z') {
+			char[] arr = str.toCharArray();
+			arr[0] += ('a' - 'A');
+			return new String(arr);
+		}
+		return str;
+	}
+    
+	/**
+	 * 首字母变大写
+	 */
+	public static String firstCharToUpperCase(String str) {
+		char firstChar = str.charAt(0);
+		if (firstChar >= 'a' && firstChar <= 'z') {
+			char[] arr = str.toCharArray();
+			arr[0] -= ('a' - 'A');
+			return new String(arr);
+		}
+		return str;
+	}
+	
     public static boolean isEmail(String str) {
         if (StrKit.isEmpty(str)){
             return false;

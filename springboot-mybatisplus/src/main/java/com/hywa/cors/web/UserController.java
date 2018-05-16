@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.hywa.cors.entity.User;
+import com.hywa.cors.framework.validate.JsonValidate;
 import com.hywa.cors.service.UserService;
+import com.hywa.cors.web.validator.user.UserLoginValidator;
+import com.hywa.cors.web.validator.user.UserSaveValidator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -32,6 +36,7 @@ public class UserController extends BaseController{
 
 	@RequestMapping("/login")
 	@ResponseBody
+	@JsonValidate(UserLoginValidator.class)
 	public AjaxJson login(User user){
 		Wrapper<User> wrapper = new EntityWrapper<>();
 		wrapper.eq("username", user.getUsername());
@@ -63,6 +68,7 @@ public class UserController extends BaseController{
 	
 	@RequestMapping("/save")
 	@ResponseBody
+	@JsonValidate(UserSaveValidator.class)
 	public AjaxJson save(User user) {
 		Boolean result=userService.insert(user);
 		return result?AjaxJson.success().setData(user):AjaxJson.failure();

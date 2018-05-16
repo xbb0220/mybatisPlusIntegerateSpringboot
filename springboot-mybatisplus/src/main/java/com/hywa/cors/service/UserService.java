@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.service.IService;
  * @author xbb
  * @since 2018-05-11
  */
-public interface UserService extends IService<User> {
+public interface UserService extends BaseService<User> {
 
     public User selectUserByUsername(String username);
 

@@ -8,6 +8,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.hywa.cors.kit.Injector;
 import com.hywa.cors.kit.StrKit;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -346,4 +348,20 @@ public class BaseController{
 		return request.getParameterMap().containsKey(paraName);
 	}
 
+	public <T> T bean(Class<T> beanClass) {
+		return (T)Injector.injectBean(beanClass, "", request, false);
+	}
+	
+	public <T> T getBean(Class<T> beanClass) {
+		return (T)Injector.injectBean(beanClass, request, false);
+	}
+	
+	public <T> T getBean(Class<T> beanClass, boolean skipConvertError) {
+		return (T)Injector.injectBean(beanClass, request, skipConvertError);
+	}
+	
+	public <T> T getBean(Class<T> beanClass, String beanName) {
+		return (T)Injector.injectBean(beanClass, beanName, request, false);
+	}
+	
 }
