@@ -2,7 +2,6 @@ package com.hywa.cors.service;
 
 import com.hywa.cors.entity.User;
 import com.hywa.cors.kit.easyui.EasyUiPage;
-import com.baomidou.mybatisplus.service.IService;
 
 /**
  * <p>

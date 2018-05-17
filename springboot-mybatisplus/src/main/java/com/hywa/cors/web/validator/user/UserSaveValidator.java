@@ -16,7 +16,7 @@ public class UserSaveValidator extends Validator {
 	@Override
 	protected void validate() {
 		validateRequired("username", "please enter username", "请输入用户名");
-		validateRequired("username", "please enter password", "请输入密码");
+		validateRequired("password", "please enter password", "请输入密码");
 		User user = controller.bean(User.class);
 		if (userService.getCountByEqual(user, "username") > 0) {
 			addError("username already exists", "用户名已经存在");

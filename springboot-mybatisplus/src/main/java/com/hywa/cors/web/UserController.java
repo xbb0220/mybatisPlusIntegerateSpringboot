@@ -1,20 +1,17 @@
 package com.hywa.cors.web;
 
 
-import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.hywa.cors.config.SessionConst;
 import com.hywa.cors.kit.AjaxJson;
 import com.hywa.cors.kit.StrKit;
 import com.hywa.cors.kit.easyui.EasyUiPage;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.hywa.cors.entity.User;
 import com.hywa.cors.framework.validate.JsonValidate;
 import com.hywa.cors.service.UserService;
 import com.hywa.cors.web.validator.user.UserLoginValidator;
 import com.hywa.cors.web.validator.user.UserSaveValidator;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -38,9 +35,7 @@ public class UserController extends BaseController{
 	@ResponseBody
 	@JsonValidate(UserLoginValidator.class)
 	public AjaxJson login(User user){
-		Wrapper<User> wrapper = new EntityWrapper<>();
-		wrapper.eq("username", user.getUsername());
-		User dbUser = userService.selectOne(wrapper);
+		User dbUser = userService.getOneByEqual(user, "username");
 		if (null == dbUser){
 			return AjaxJson.failure().setMsg("用户名不存在");
 		}
