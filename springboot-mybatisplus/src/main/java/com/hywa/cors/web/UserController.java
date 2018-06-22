@@ -50,7 +50,7 @@ public class UserController extends BaseController{
 	@RequestMapping("/page")
 	@ResponseBody
 	public EasyUiPage<User> page(EasyUiPage<User> pageInfo, User user) {
-		return userService.page(pageInfo, user);
+		return userService.pageByDynamicEqual(pageInfo, user, "username", "realname");
 	}
 	
 	@RequestMapping("/update")
