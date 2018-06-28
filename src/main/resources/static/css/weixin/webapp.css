@@ -1,0 +1,96 @@
+/*整体皮肤配色库*/
+.mdtSt1 .page, .page-group{background:#f8f8f8;}
+.mdtSt1 .bar-nav{background:#3fc2c7;}
+.mdtSt1 .bar-nav .title{color:#fff;}
+.mdtSt1 .bar-nav .button-link{color:#fff;padding:0 5px;}
+.mdtSt1 .bar-tab{background:#fff;height:3rem;padding-top:0.4rem;font-size:14px;}
+.bar-tab span.iconfont{display:block;}
+.mdtSt1 .bar-tab .tab-item.active, .bar-tab .tab-item:active{color:#3fc2c7;}
+.mdtSt1 a{color:#42c4c9;}
+/*公用样式库*/
+.hide{display:none;}
+.mod-table{width:100%;border-spacing:0;border-collapse:collapse;text-align:center;}
+.mod-table tr td{height:35px;line-height:35px;border:1px solid #ededed;}
+.mod-table tr td.ltt{width:76px;background:#e0e0e0;font-weight:bold;}
+.mod-dlItem{overflow:hidden;margin:9px 0;}
+.mod-dlItem dt{float:left;font-weight:bold;}
+.mod-dlItem dd{margin:0;padding:0;color:#5d5d5d;}
+.loading{margin:10px 0 5px 0;padding:15px 0;text-align:center;}
+.loading img{vertical-align:-8px;}
+.small-title{color:#7d7d7d;font-size:14px;}
+.item-inner-btn{display:block;width:230px;}
+/*我的体检记录*/
+.nodata{text-align:center;font-size:14px;margin-top:30%;color:#696969;}
+.nodata span{font-size:4rem;}
+.nodata p{margin:0px 0 0 0;font-weight:bold;}
+.nochedata{margin-top:20%;}
+/*我要汇报*/
+.addItem{width:100%;min-height:2.2rem;line-height:2.2rem;padding-top:6px;text-align:center;color:#04b3fc;font-weight:bold;}
+.addItem .iconfont{margin-right:3px;font-size:22px;vertical-align:-3px;}
+.myreportNum{color:#fd763b;}
+/*快速上报*/
+.quickReport{background:#3fc2c7;padding:3.5rem 1.5rem;color:#fff;}
+.quickReport h1{margin:5px 0;font-size:1.4rem;}
+.quickReport p{margin:0;font-size:14px;}
+.quickReport select{width:100%;height:40px;margin:17px 0;background:#fff;border:1px solid rgba(255,255,255,0.6);color:#000;}
+.quickReport .qrbtn{display:block;position:fixed;width:100%;height:2.5rem;line-height:2.1rem;bottom:0;left:0;right:0;background:rgba(0,0,0,.7);padding:.2rem;color:#fff;text-align:center;}
+/*我汇报的情况*/
+.mrBtn{text-align:center;padding:5px 0px 15px 0;font-size:14px;}
+.mrBtn .iconfont{margin-right:5px;vertical-align:middle;}
+.doctorSayTxt{list-style:none;margin:0;padding:0;}
+.doctorSayTxt li{padding:0 10px;}
+.doctorSayTxt li .dstHead{width:100%;height:45px;line-height:45px;overflow:hidden;border-bottom:1px solid #ebebeb;}
+.doctorSayTxt li .dstHead .author{font-weight:bold;}
+.doctorSayTxt li .dstHead .time{color:#878787;}
+.doctorSayTxt li .dstCont{padding:15px 5px;}
+.doctorSayTxtMore{text-align:center;padding:10px 0;font-size:16px;}
+.doctorSayTxtMore .iconfont{vertical-align:-1px;margin-right:4px;}
+.myReportDetails .card-header{font-size:16px;} 
+/*定制方案*/
+.rwpdInfo{padding:16px 0;width:auto;}
+.rwpdInfo dl,
+.rwpdInfo dd{margin:0;padding:0;list-style:none;font-size:16px;}
+.rwpdInfo dd{display:block;width:100%;padding:6px 0;overflow:hidden;}
+.rwpdInfo dd span{display:block;}
+.rwpdInfo dd span.rwpdInfoTitle{float:left;color:#262722;}
+.rwpdInfo dd span.rwpdInfoVal{float:right;}
+.rwpdInfo dd span.rwpdInfoVal,
+.rwpdInfo dd.rwpdItemVal{color:#a2a2a2;}
+.rwPlanfoods .item-title-row{margin-bottom:15px;}
+.rwPlanfoods div.item-text{height:auto;margin-bottom:10px;text-overflow:clip;-webkit-line-clamp:initial;}
+.rwPlanfoods .item-after{color:#a2a2a2;font-size:14px;}
+.rwPlanfoods .item-title{font-size:15px;}
+/*我的减重方案*/
+.schemePanel{position:absolute;z-index:9999;top:2.2rem;right:0;width:13rem;max-height:350px;overflow-y:scroll;background:#fff;border:1px solid #ededed;}
+.schemePanel .list-block{margin:0;}
+.schemePanel .list-block ul li{font-size:14px;}
+.schemePanel .list-block ul li.active .iconfont{color:#3fc2c7;}
+/*用户中心*/
+.ucHead{height:145px;padding-top:20px;background:#3fc2c7;background-size:100% 100%;}
+.uc-face{border-radius:50%;border:3px solid rgba(230,230,230,0.6);overflow:hidden;}
+.ucbinfo{text-align:center;}
+.uc-baseinfo{color:#fff;font-size:14px;}
+.uc-baseinfo .iconfont{font-size:18px;}
+.uc-baseinfo .sex_man{color:#1e92ff;}
+.uc-baseinfo .sex_woman{color:#ff416c;}
+.uc-baseinfo p{margin:0;}
+.helpCont img{width:100%;}
+.aboutus_cont{padding:10px;text-align:center;}
+.aboutus_cont p{text-align:left;line-height:1.4rem;font-size:16px;text-indent: 2em;}
+.aboutus_cont img{margin-top:30px;}
+.tel .iconfont{font-size:22px;margin-right:5px;}
+.noticeNum{display:block;position:absolute;top:6px;right:-4px;padding:0 5px;height:15px;line-height:15px;background:#f8664d;color:#fff;font-size:11px;text-align:center;border-radius:100%;font-style:normal;}
+.noticeCenter .list-block .iconfont{font-size:1.2rem;color:#cecac9;}
+.noticeCenter .list-block .item-title{color:#2e2526;}
+.noticeCenter .item-after .badge{background:#f8664d;color:#fff;}
+.noticeCenter .item-content{position:relative;}
+.noticeListCeFace{width:65px;}
+.noticeListCeFace img{border-radius:100%;position:absolute;top:13px;}
+.noticeListCont{font-size:14px;margin-top:5px;color:#7b7b7b;}
+.noticeListCont .noticeHight{color:#42c4c9;}
+.noticeCenter .item-title{font-size:16px;font-weight:normal;}
+.noticeCenter .item-after{font-size:12px;line-height:1.3rem;}
+
+
+
+

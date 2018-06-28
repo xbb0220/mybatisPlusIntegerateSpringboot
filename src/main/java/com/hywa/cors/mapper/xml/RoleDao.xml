@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hywa.cors.mapper.RoleDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hywa.cors.entity.Role">
+        <id column="id" property="id" />
+        <result column="roleName" property="roleName" />
+        <result column="roleCode" property="roleCode" />
+    </resultMap>
+
+
+	<select id="listByUserId" resultType="com.hywa.cors.vo.RoleVo">
+		select role.*, 
+		(select count(*) from user_role where userId=#{userId} and roleId=role.id) count
+		from role
+	</select>
+
+</mapper>

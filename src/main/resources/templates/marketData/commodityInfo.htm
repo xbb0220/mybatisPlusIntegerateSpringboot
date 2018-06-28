@@ -1,0 +1,119 @@
+<#include "/include.htm">
+    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>商品信息管理</title>
+        <link rel="stylesheet" type="text/css" href="/css/default/easyui.css">
+        <link rel="stylesheet" type="text/css" href="/css/moreIcons/IconExtension.css">
+        <link rel="stylesheet" type="text/css" href="/css/icon.css">
+        <link rel="stylesheet" type="text/css" href="/css/animate.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/iconfont/iconfont.css">
+        <link rel="stylesheet" type="text/css" href="/css/rf.css">
+        <script type="text/javascript" src="/js/lib/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/lib/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="/js/lib/easyui-lang-zh_CN.js"></script>
+        <script type="text/javascript" src="/js/plugin.js"></script>
+        <script type="text/javascript">
+            var base = '${base}';
+        </script>
+    </head>
+    <body>
+    <table id="commodityInfoGrid"></table>
+    <div id="commodityInfoSaveWin" title="商品信息添加" class="easyui-window" style="width:340px;height:290px;padding:5px;" data-options="closed:true,footer:'#ft1'">
+        <form id="saveCommodityInfoForm" style="padding:10px 20px 10px 10px;">
+            <input type="text" name="id" class="hide">
+            <table>
+                <tr>
+                    <td>商品名称:</td>
+                    <td><input type="text" name="name" class="easyui-textbox" data-options="required:true" style="width:180px"></td>
+                </tr>
+                <tr>
+                    <td>当日销售数量:</td>
+                    <td><input type="text" name="number" class="easyui-numberbox" data-options="required:true" style="width:180px"></td>
+                </tr>
+                <tr>
+                    <td>商品单价(元):</td>
+                    <td><input type="text" name="price" class="easyui-numberbox" data-options="required:true, precision:2, prefix:'¥'" style="width:180px"></td>
+                </tr>
+                <tr>
+                    <td>商品状态:</td>
+                    <td><input type="text" name="status" class="commodityInfoStatusCombo" data-options="required:true" style="width:180px"></td>
+                </tr>
+                <tr>
+                    <td>统计日期:</td>
+                    <td><input type="text" name="createTime" class="easyui-datebox" data-options="required:true" style="width:180px"></td>
+                </tr>
+                <tr>
+                    <td>所属市场:</td>
+                    <td><input type="text" name="marketInfoId" class="marketInfoCombo" data-options="required:true" style="width:180px"></td>
+                </tr>
+            </table>
+        </form>
+        <div id="ft1" style="padding: 5px; text-align: right;">
+            <a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="saveCommodityInfo()">保存</a>&nbsp
+            <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="closeSaveCommodityInfoWin()">取消</a>
+        </div>
+    </div>
+
+    <div id="commodityInfoGridToolBar">
+        <form id="queryForm">
+            <table>
+                <tr>
+                    <td>
+                        <span>市场:<input name="marketInfoId" class="marketInfoCombo" ></span>
+                        <span>商品名称:<input name="name" class="easyui-textbox"></span>
+                        <span>统计日期:<input name="createTime" class="easyui-datebox"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-search" onclick="doSearch()">查询</a>
+                        <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-add" onclick="openSaveCommodityInfoWin()">添加</a>
+                        <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-edit" onclick="openUpdateCommodityInfoWin()">修改</a>
+                        <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-cancel" onclick="deleteCommodityInfo()">删除</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div id="commodityInfoUpdateWin" title="商品信息更新" class="easyui-window" style="width:340px;height:290px;padding:5px;" data-options="closed:true,footer:'#ft2'">
+        <form id="updateCommodityInfoForm" style="padding:10px 20px 10px 10px;">
+            <input type="text" name="id" class="hide">
+            <table>
+                <tr>
+                    <td>商品名称:</td>
+                    <td><input type="text" name="name" class="easyui-textbox" data-options="required:true" style="width:180px"></td>
+                </tr>
+                <tr>
+                    <td>当日销售数量:</td>
+                    <td><input type="text" name="number" class="easyui-numberbox" data-options="required:true" style="width:180px"></td>
+                </tr>
+                <tr>
+                    <td>商品单价(元):</td>
+                    <td><input type="text" name="price" class="easyui-numberbox" data-options="required:true, precision:2, prefix:'¥'" style="width:180px"></td>
+                </tr>
+                <tr>
+                    <td>商品状态:</td>
+                    <td><input type="text" name="status" class="commodityInfoStatusCombo" data-options="required:true" style="width:180px"></td>
+                </tr>
+                <tr>
+                    <td>统计日期:</td>
+                    <td><input type="text" name="createTime" class="easyui-datebox" data-options="required:true" style="width:180px"></td>
+                </tr>
+                <tr>
+                    <td>所属市场:</td>
+                    <td><input type="text" name="marketInfoId" class="marketInfoCombo" data-options="required:true" style="width:180px"></td>
+                </tr>
+            </table>
+        </form>
+        <div id="ft2" style="padding: 5px; text-align: right;">
+            <a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="updateCommodityInfo()">保存</a>&nbsp
+            <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="closeUpdateCommodityInfoWin()">取消</a>
+        </div>
+    </div>
+
+    </body>
+    <script type="text/javascript" src="/script/marketData/commodityInfo.js"></script>
+    </html>

@@ -1,0 +1,97 @@
+<#include "/include.htm">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>主要生产基地管理</title>
+    <link rel="stylesheet" type="text/css" href="/css/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/css/moreIcons/IconExtension.css">
+    <link rel="stylesheet" type="text/css" href="/css/icon.css">
+    <link rel="stylesheet" type="text/css" href="/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/iconfont/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/css/rf.css">
+    <script type="text/javascript" src="/js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/lib/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/js/lib/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="/js/plugin.js"></script>
+    <script type="text/javascript">
+    		var base = '${base}';
+    </script>
+</head>
+<body>
+	<table id="mainProductBaseGrid"></table>
+	<div id="mainProductBaseSaveWin" title="主要生产基地添加" class="easyui-window" style="width:350px;height:200px;padding:5px;" data-options="closed:true,footer:'#ft1'">
+    <form id="saveMainProductBaseForm" style="padding:10px 20px 10px 10px;">
+        <input type="text" name="id" class="hide">
+        <table>
+            <tr>
+                <td>生产基地（市场）:</td>
+                <td><input type="text" name="marketInfoId" class="marketInfoCombo" data-options="required:true" style="width:180px" ></td>
+            </tr>
+            <tr>
+                <td>产品名称:</td>
+                <td><input type="text" name="productName" class="easyui-combobox  productName" data-options="required:true" style="width:180px"></td>
+            </tr>
+            <tr>
+                <td>年产能:</td>
+                <td><input type="text" name="number" class="easyui-numberbox" data-options="required:true" style="width:180px"></td>
+            </tr>
+        </table>
+    </form>
+    <div id="ft1" style="padding: 5px; text-align: right;">
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="saveMainProductBase()">保存</a>&nbsp
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="closeSaveMainProductBaseWin()">取消</a>
+    </div>
+	</div>
+
+	<div id="mainProductBaseGridToolBar">
+	    <form id="queryForm">
+	        <table>
+	           <tr>
+	            <td>
+	                <span>生产基地（市场）:<input name="marketInfoId" class="marketInfoCombo" style="width:180px"></span>
+	                <span>产品名称:<input type="text" name="productName" class="easyui-textbox" style="width:180px"></span>
+	                <!-- 
+	                <span>商品名称:<input name="name" class="easyui-textbox"></span>
+	                <span>统计日期:<input name="createTime" class="easyui-datebox"></span> -->
+	            </td>
+	            </tr>
+	            <tr>
+	                <td>
+	                <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-search" onclick="doSearch()">查询</a>
+	                <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-add" onclick="openSaveMainProductBaseWin()">添加</a>
+	                <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-edit" onclick="openUpdateMainProductBaseWin()">修改</a>
+	                <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-cancel" onclick="deleteMainProductBase()">删除</a>
+	                </td>
+	            </tr>
+	        </table>
+	    </form>
+	</div>
+
+	<div id="mainProductBaseUpdateWin" title="主要生产基地更新" class="easyui-window" style="width:350px;height:200px;padding:5px;" data-options="closed:true,footer:'#ft2'">
+    <form id="updateMainProductBaseForm" style="padding:10px 20px 10px 10px;">
+        <input type="text" name="id" class="hide">
+        <table>
+               <tr>
+                <td>生产基地（市场）:</td>
+                <td><input type="text" name="marketInfoId" class="marketInfoCombo" data-options="required:true" style="width:180px"></td>
+            </tr>
+            <tr>
+                <td>产品名称:</td>
+                <td><input type="text" name="productName" class="easyui-textbox" data-options="required:true" style="width:180px"></td>
+            </tr>
+            <tr>
+                <td>年产能:</td>
+                <td><input type="text" name="number" class="easyui-numberbox" data-options="required:true" style="width:180px"></td>
+            </tr>
+        </table>
+    </form>
+    <div id="ft2" style="padding: 5px; text-align: right;">
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="updateMainProductBase()">保存</a>&nbsp
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="closeUpdateMainProductBaseWin()">取消</a>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="/script/marketData/mainProductBase.js"></script>
+</html>

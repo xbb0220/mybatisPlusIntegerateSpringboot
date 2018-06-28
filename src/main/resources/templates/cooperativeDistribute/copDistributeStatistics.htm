@@ -1,0 +1,222 @@
+<#include "/include.htm">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>合作社分布统计</title>
+	<link rel="stylesheet" type="text/css" href="/css/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/css/moreIcons/IconExtension.css">
+	<link rel="stylesheet" type="text/css" href="/css/icon.css">
+	<link rel="stylesheet" type="text/css" href="/css/animate.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/iconfont/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="/css/rf.css">
+	<script type="text/javascript" src="/js/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/lib/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/js/lib/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="/js/plugin.js"></script>
+</head>
+<body>
+    <table id="copDistributeStatisticsGrid"></table>
+    <!-- 增加 -->
+	<div id="addCopDistributeStatisticsWin" title="添加合作社分布统计数据" class="easyui-window" style="padding:5px;width:400px;height:400px;"data-options="closed:true,footer:'#ft1'">
+	    <form id="addCopDistributeStatisticsForm" style="padding:10px 20px 10px 10px;text-align:center;">
+	    	<input type="text" name="id" class="hide">
+	    	<table>
+	    		<tr>
+	    			<td>农户经营总体数量:</td><td><input type="text" name="agriManageNum" class="easyui-numberbox"  style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>农户经营总体数量环比:</td><td><input type="text" name="agriManageNumLinkRatio" class="easyui-numberbox" precision="2" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>农户数:</td><td><input type="text" name="agriNum" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>分司数:</td><td><input type="text" name="company" class="easyui-numberbox"  style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>合作社数:</td><td><input type="text" name="cooperatives" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>其它:</td><td><input type="text" name="other" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>申请贷款农户数:</td><td><input type="text" name="applyLoanAgriNum" class="easyui-numberbox"  style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>申请贷款公司数:</td><td><input type="text" name="applyLoanComNum" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>其它:</td><td><input type="text" name="applyLoanTotalNum" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>申请贷款总额:</td><td><input type="text" name="applyLoanAgriNum" class="easyui-numberbox" data-options="precision:2, prefix:'¥'" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>项目总数:</td><td><input type="text" name="projectNum" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>土地规模(单位：亩):</td><td><input type="text" name="soilScale" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>投入总计:</td><td><input type="text" name="totalInvest" class="easyui-numberbox" data-options="precision:2, prefix:'¥'" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>预计收入:</td><td><input type="text" name="expectIncome" class="easyui-numberbox" data-options="precision:2, prefix:'¥'" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>预计收入环比:</td><td><input type="text" name="expectIncomeLinkRatio" class="easyui-numberbox" precision="2" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>涉农供应商(单位：家):</td><td><input type="text" name="agriSupplier" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>涉农供应商环比:</td><td><input type="text" name="agriSupplierLinkRatio" class="easyui-numberbox" precision="2" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>涉农产品(单位:种):</td><td><input type="text" name="agriSupplyProduct" class="easyui-numberbox"  style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>农技专家(单位:位):</td><td><input type="text" name="expertsNum" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>农技专家环比:</td><td><input type="text" name="expertsNumLinkRatio" class="easyui-numberbox" precision="2" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>金融渠道(单位:个):</td><td><input type="text" name="financeChannel" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>金融渠道环比:</td><td><input type="text" name="financeChannelLinkRatio" class="easyui-numberbox" precision="2" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>农技专家环比:</td><td><input type="text" name="expertsNumLinkRatio" class="easyui-textbox" precision="2" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>物联网设备数(单位:个):</td><td><input type="text" name="thingNetEquipNum" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>物联网设备数环比:</td><td><input type="text" name="thingNetEquipNumLinkRatio" class="easyui-numberbox"  precision="2" style="width:180px"></td>
+	    		</tr>
+	    	</table>
+	    </form>
+	    <div id="ft1" style="padding: 5px; text-align: right;">
+	    		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="addSave()">保存</a>&nbsp
+	    		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel"  onclick="addClose()">取消</a>
+	    </div>
+	    </div>
+	   
+	    
+
+	
+	<div id="copDistributeStatisticsGridToolBar"  >
+	<form id="queryForm">
+		<table >
+			<!-- <tr>
+				<td>
+					<span>分析结果:<input name="result" class="easyui-numberbox"></span>
+					<span>农作物类型:<input class="type" name="type"></span>
+					<span>年份:<input class="easyui-numberbox" name="year"></span>
+				</td>		
+			</tr> -->
+			<tr>
+			<td>
+				<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-add"  onclick="add()">添加</a>
+				<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-edit" onclick="update()">修改</a>
+				<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-cancel" onclick="del()">删除</a>
+				<a href="#" class="easyui-linkbutton" plain="true"  iconCls="icon-search" onclick="doSearch()">搜索</a>
+			</td>
+			</tr>
+		</table>
+	</form>
+	</div>
+	
+	<!-- 修改 -->
+	<div id="updateCopDistributeStatisticsWin" title="修改合作社分布统计数据" class="easyui-window" style="padding:5px;width:400px;height:400px;"data-options="closed:true,footer:'#ft2'">
+	    <form id="updateCopDistributeStatisticsForm" style="padding:10px 20px 10px 10px;text-align:center;">
+	    	<input type="text" name="id" class="hide" />
+	    	<table>
+	    		<tr>
+	    			<td>农户经营总体数量:</td><td><input type="text" name="agriManageNum" class="easyui-numberbox"  style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>农户经营总体数量环比:</td><td><input type="text" name="agriManageNumLinkRatio" class="easyui-numberbox" precision="2" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>农户数:</td><td><input type="text" name="agriNum" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>分司数:</td><td><input type="text" name="company" class="easyui-numberbox"  style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>合作社数:</td><td><input type="text" name="cooperatives" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>其它:</td><td><input type="text" name="other" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>申请贷款农户数:</td><td><input type="text" name="applyLoanAgriNum" class="easyui-numberbox"  style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>申请贷款公司数:</td><td><input type="text" name="applyLoanComNum" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>其它:</td><td><input type="text" name="applyLoanTotalNum" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>申请贷款总额:</td><td><input type="text" name="applyLoanAgriNum" class="easyui-numberbox" data-options="precision:2, prefix:'¥'" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>项目总数:</td><td><input type="text" name="projectNum" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>土地规模(单位：亩):</td><td><input type="text" name="soilScale" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>投入总计:</td><td><input type="text" name="totalInvest" class="easyui-numberbox" data-options="precision:2, prefix:'¥'" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>预计收入:</td><td><input type="text" name="expectIncome" class="easyui-numberbox" data-options="precision:2, prefix:'¥'" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>预计收入环比:</td><td><input type="text" name="expectIncomeLinkRatio" class="easyui-numberbox" precision="2"  style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>涉农供应商(单位：家):</td><td><input type="text" name="agriSupplier" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>涉农供应商环比:</td><td><input type="text" name="agriSupplierLinkRatio" class="easyui-numberbox" precision="2" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>涉农产品(单位:种):</td><td><input type="text" name="agriSupplyProduct" class="easyui-numberbox"  style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>农技专家(单位:位):</td><td><input type="text" name="expertsNum" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>农技专家环比:</td><td><input type="text" name="expertsNumLinkRatio" class="easyui-numberbox" precision="2" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>金融渠道(单位:个):</td><td><input type="text" name="financeChannel" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>金融渠道环比:</td><td><input type="text" name="financeChannelLinkRatio" class="easyui-numberbox" precision="2" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>物联网设备数(单位:个):</td><td><input type="text" name="thingNetEquipNum" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>物联网设备数环比:</td><td><input type="text" name="thingNetEquipNumLinkRatio" class="easyui-numberbox"  precision="2" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>农技专家环比:</td><td><input type="text" name="expertsNumLinkRatio" class="easyui-numberbox" precision="2" style="width:180px"></td>
+	    		</tr>
+	    	</table>
+	    </form>
+	    <div id="ft2" style="padding: 5px; text-align: right;">
+	    		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="updateSave() ">保存</a>&nbsp
+	    		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="updateClose()">取消</a>
+	    </div>
+	</div>    
+</body>
+<script type="text/javascript" src="/script/cooperativeDistribute/copDistributeStatistics.js"></script>
+</html>

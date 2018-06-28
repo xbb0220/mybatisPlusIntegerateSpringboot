@@ -1,0 +1,102 @@
+<#include "/include.htm">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>平均收入管理</title>
+    <link rel="stylesheet" type="text/css" href="/css/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/css/moreIcons/IconExtension.css">
+    <link rel="stylesheet" type="text/css" href="/css/icon.css">
+    <link rel="stylesheet" type="text/css" href="/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/iconfont/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/css/rf.css">
+    <script type="text/javascript" src="/js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/lib/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/js/lib/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="/js/plugin.js"></script>
+    <script type="text/javascript">
+    		var base = '${base}';
+    </script>
+</head>
+<body>
+	<table id="averageIncomeGrid"></table>
+	<div id="averageIncomeSaveWin" title="平均收入添加" class="easyui-window" style="width:320px;height:250px;padding:5px;" data-options="closed:true,footer:'#ft1'">
+    <form id="saveAverageIncomeForm" style="padding:10px 20px 10px 10px;">
+        <input type="text" name="id" class="hide">
+        <table>
+            <tr>
+                <td>合作社收入:</td>
+                <td><input type="text" name="cooperativesIncome" class="easyui-numberbox" data-options="required:true, precision:2, prefix:'¥'" style="width:180px"></td>
+            </tr>
+            <tr>
+                <td>其他散户:</td>
+                <td><input type="text" name="otherIncome" class="easyui-numberbox" data-options="required:true" style="width:180px"></td>
+            </tr>
+            <tr>
+                <td>年份:</td>
+                <td><input type="text" name="year" class="easyui-numberbox" data-options="required:true" style="width:180px"></td>
+            </tr>
+            <tr>
+                <td>合作社:</td>
+                <td><input type="text" name="cooperativesId" class="cooperativesCombo" data-options="required:true" style="width:180px"></td>
+            </tr>
+        </table>
+    </form>
+    <div id="ft1" style="padding: 5px; text-align: right;">
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="saveAverageIncome()">保存</a>&nbsp
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="closeSaveAverageIncomeWin()">取消</a>
+    </div>
+	</div>
+
+	<div id="averageIncomeGridToolBar">
+	    <form id="queryForm">
+	        <table>
+	            <tr>
+	            <td>
+	                <span>合作社:<input name="cooperativesId" class="cooperativesCombo" ></span>
+	                <span>年份:<input name="year" class="easyui-numberbox  year"></span>
+	            </td>
+	            </tr>
+	            <tr>
+	                <td>
+	                <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-search" onclick="doSearch()">查询</a>
+	                <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-add" onclick="openSaveAverageIncomeWin()">添加</a>
+	                <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-edit" onclick="openUpdateAverageIncomeWin()">修改</a>
+	                <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-cancel" onclick="deleteAverageIncome()">删除</a>
+	                </td>
+	            </tr>
+	        </table>
+	    </form>
+	</div>
+
+	<div id="averageIncomeUpdateWin" title="平均收入更新" class="easyui-window" style="width:320px;height:250px;padding:5px;" data-options="closed:true,footer:'#ft2'">
+    <form id="updateAverageIncomeForm" style="padding:10px 20px 10px 10px;">
+        <input type="text" name="id" class="hide">
+        <table>
+            <tr>
+                <td>合作社收入:</td>
+                <td><input type="text" name="cooperativesIncome" class="easyui-numberbox" data-options="required:true, precision:2, prefix:'¥'" style="width:180px"></td>
+            </tr>
+            <tr>
+                <td>其他散户:</td>
+                <td><input type="text" name="otherIncome" class="easyui-numberbox" style="width:180px" data-options="required:true"></td>
+            </tr>
+            <tr>
+                <td><font style="color: red">年份:</font></td>
+                <td><input type="text" name="year" class="easyui-numberbox" style="width:180px" readonly="true"></td>
+            </tr>
+            <tr>
+                <td><font style="color: red">合作社:</font></td>
+                <td><input type="text" name="cooperativesId" class="cooperativesCombo" style="width:180px" readonly="true"></td>
+            </tr>
+        </table>
+    </form>
+    <div id="ft2" style="padding: 5px; text-align: right;">
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="updateAverageIncome()">保存</a>&nbsp
+        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="closeUpdateAverageIncomeWin()">取消</a>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="/script/ygCooperatives/averageIncome.js"></script>
+</html>

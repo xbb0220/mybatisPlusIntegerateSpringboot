@@ -1,0 +1,157 @@
+<#include "/include.htm">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>门店经营信息管理</title>
+	<link rel="stylesheet" type="text/css" href="/css/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/css/moreIcons/IconExtension.css">
+	<link rel="stylesheet" type="text/css" href="/css/icon.css">
+	<link rel="stylesheet" type="text/css" href="/css/animate.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/iconfont/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="/css/rf.css">
+	<link rel="stylesheet" type="text/css" href="/jquery-easyui-portal/portal.css">
+	<script type="text/javascript" src="/js/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/lib/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/js/lib/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="/js/plugin.js"></script>
+	<script type="text/javascript" src="/jquery-easyui-portal/jquery.portal.js"></script>
+	 <script type="text/javascript">
+    		var base = '${base}';
+    </script>
+</head>
+<body>
+    <table id="storeManagerInfoGrid"></table>
+    <!-- 增加 -->
+	<div id="addStoreManagerInfoWin" title="添加门店经营信息管理" class="easyui-window" style="padding:5px;width:350px;height:500px;"data-options="closed:true,footer:'#ft1'">
+	    <form id="addStoreManagerInfoForm" style="padding:10px 20px 10px 10px;text-align:center;">
+	    	<input type="text" name="id" class="hide">
+	    	<table>
+	    		<tr>
+	    			<td>日线下销售额:</td><td><input type="text" name="offlineSales" class="easyui-numberbox"  style="width:180px" data-options="required:true"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日线上销售额:</td><td><input type="text" name="onlineSales" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日线下用户数:</td><td><input type="text" name="offlineUsersNum" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日线上用户数:</td><td><input type="text" name="onlineUsersNum" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日购买次数:</td><td><input type="text" name="averageDailyBuyFrequency" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日首购会员数量:</td><td><input type="text" name="firstPurchaseMemberNum" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日复购会员数量:</td><td><input type="text" name="repurchaseMemberNum" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日人流量:</td><td><input type="text" name="passengerFlow" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>创建时间:</td><td><input type="text" name="createTime" class="easyui-datebox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>用户复购率:</td><td><input type="text" name="repurchaseRate" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日成本投入:</td><td><input type="text" name="inputCosts" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日购买用户新增率:</td><td><input type="text" name="buyingUserRaiseRates" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日用户新增率:</td><td><input type="text" name="userRaiseRates" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>门店名称:</td><td><input type="text" name="storeId" class="storeId" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    	</table>
+	    </form>
+	    <div id="ft1" style="padding: 5px; text-align: right;">
+	    		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="addSave()">保存</a>&nbsp
+	    		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel"  onclick="addClose()">取消</a>
+	    </div>
+	    </div>
+	    <!-- 搜索 -->
+	<div id="storeManagerInfoGridToolBar"  >
+	<form id="queryForm">
+		<table >
+			<tr>
+				<td>
+					<span>门店名称:<input class="easyui-combobox storeId" name="storeId"></span>
+
+				</td>		
+			</tr>
+			<tr>
+			<td>
+				<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-add"  onclick="add()">添加</a>
+				<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-edit" onclick="update()">修改</a>
+				<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-cancel" onclick="del()">删除</a>
+				<a href="#" class="easyui-linkbutton" plain="true"  iconCls="icon-search" onclick="doSearch()">搜索</a>
+			</td>
+			</tr>
+		</table>
+	</form>
+	</div>
+	
+	<!-- 修改 -->
+	<div id="updateStoreManagerInfoWin" title="修改门店经营信息管理" class="easyui-window" style="padding:5px;width:350px;height:500px;"data-options="closed:true,footer:'#ft2'">
+	    <form id="updateStoreManagerInfoForm" style="padding:10px 20px 10px 10px;text-align:center;">
+	    	<input type="text" name="id" class="hide">
+	    	<table>
+	    		<tr>
+	    			<td>日线下销售额:</td><td><input type="text" name="offlineSales" class="easyui-numberbox"  style="width:180px" data-options="required:true"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日线上销售额:</td><td><input type="text" name="onlineSales" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日线下用户数:</td><td><input type="text" name="offlineUsersNum" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日线上用户数:</td><td><input type="text" name="onlineUsersNum" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日购买次数:</td><td><input type="text" name="averageDailyBuyFrequency" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日首购会员数量:</td><td><input type="text" name="firstPurchaseMemberNum" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日复购会员数量:</td><td><input type="text" name="repurchaseMemberNum" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日人流量:</td><td><input type="text" name="passengerFlow" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td><font color="red">创建时间:</font></td><td><input type="text" name="createTime" class="easyui-datebox" style="width:180px" data-options="required:true"   readonly="readonly"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>用户复购率:</td><td><input type="text" name="repurchaseRate" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日成本投入:</td><td><input type="text" name="inputCosts" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日购买用户新增率:</td><td><input type="text" name="buyingUserRaiseRates" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>日用户新增率:</td><td><input type="text" name="userRaiseRates" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td><font color="red">门店名称:</font></td><td><input type="text" name="storeId" class="storeId" style="width:180px" data-options="required:true"   readonly="readonly"></td>
+	    		</tr>
+	    	</table>
+	    </form>
+	    <div id="ft2" style="padding: 5px; text-align: right;">
+	    		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="updateSave() ">保存</a>&nbsp
+	    		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="updateClose()">取消</a>
+	    </div>
+	</div>
+</body>
+<script type="text/javascript" src="/script/storeBigData/storeManagerInfo.js"></script>
+</html>

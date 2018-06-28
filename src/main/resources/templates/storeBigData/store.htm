@@ -1,0 +1,143 @@
+<#include "/include.htm">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>在线专家管理</title>
+	<link rel="stylesheet" type="text/css" href="/css/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/css/moreIcons/IconExtension.css">
+	<link rel="stylesheet" type="text/css" href="/css/icon.css">
+	<link rel="stylesheet" type="text/css" href="/css/animate.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/iconfont/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="/css/rf.css">
+	<script type="text/javascript" src="/js/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/lib/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/js/lib/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="/js/plugin.js"></script>
+</head>
+<body>
+    <table id="storeGrid"></table>
+    <!-- 增加 -->
+	<div id="saveStoreWin" title="添加在线专家信息" class="easyui-window" style="padding:5px;width:400px;height:380px;"data-options="closed:true,footer:'#ft1'">
+	    <form id="saveStoreForm" style="padding:10px 20px 10px 10px;text-align:center;" method="POST" enctype="multipart/form-data" >
+	    	<input type="text" name="id" class="hide">
+	    	<table>
+	    		<tr>
+	    			<td>名称:</td><td><input type="text" name="name" class="easyui-textbox"  style="width:180px" data-options="required:true"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>建立时间:</td><td><input type="text" name="establishedTime" class="easyui-datebox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>经营类型:</td><td><input type="text" name="type" class="easyui-textbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>所在地区:</td><td><input type="text" name="region" class="easyui-textbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>经度:</td><td><input type="text" name="longitude" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>纬度:</td><td><input type="text" name="latitude" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>市辖区数量:</td><td><input type="text" name="popedomNum" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>市辖区:</td><td><input type="text" name="popedom" class="easyui-textbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>门店图片:</td>
+	    			<td>
+                            <div id="saveImagePreview">
+                                <img id="saveImage"  width="200"  height="200">
+                            </div>
+                            <input type="file" name="file" onchange="PreviewImage(this,'saveImage','saveImagePreview')" /><br/>
+                        </td>
+	    		</tr>
+	    		<tr>
+	    			<td>试售价:</td><td><input type="text" name="tryPrice" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>门店状态:</td><td><input class="storeStatus" name="storeStatus" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    	</table>
+	    </form>
+	    <div id="ft1" style="padding: 5px; text-align: right;">
+                <a href="#" class="easyui-linkbutton" plian="true" icon="icon-ok" id="saveStoreSbmt" onclick="saveStore()">保存</a>
+                <a href="#" class="easyui-linkbutton" plian="true" icon="icon-ok" id="closeSaveStoreSbmt" onclick="closeAddStore()">取消</a>
+            </div>
+	    </div>
+	<div id="storeGridToolBar"  >
+	<form id="queryForm">
+		<table >
+			<tr>
+				<td>
+					<span>名称:<input class="easyui-textbox" name="name"></span>
+					<span>经营类型:<input class="easyui-combobox type" name="type"></span>
+					<span>所在地区:<input class="easyui-comboxbox region" name="region"></span>
+				</td>		
+			</tr>
+			<tr>
+			<td>
+                            <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-search" onclick="searchStore()">搜索</a>
+                            <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-add" onclick="openSaveStoreWin()">添加</a>
+                            <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-edit" onclick="openUpdateStoreWin()">修改</a>
+                            <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-cancel" onclick="deleteStore()">删除</a>
+                        </td>
+			</tr>
+		</table>
+	</form>
+	</div>
+	
+	<!-- 修改 -->
+	<div id="updateStoreWin" title="修改在线专家信息" class="easyui-window" style="padding:5px;width:400px;height:380px;"data-options="closed:true,footer:'#ft2'">
+	    <form id="updateStoreForm" style="padding:10px 20px 10px 10px;text-align:center;" method="POST" enctype="multipart/form-data" >
+	    	<input type="text" name="id" class="hide">
+	    	   <table>
+	    		<tr>
+	    			<td>名称:</td><td><input type="text" name="name" class="easyui-textbox"  style="width:180px" data-options="required:true"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>建立时间:</td><td><input type="text" name="establishedTime" class="easyui-datebox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>经营类型:</td><td><input type="text" name="type" class="easyui-textbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>所在地区:</td><td><input type="text" name="region" class="region" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>经度:</td><td><input type="text" name="longitude" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>纬度:</td><td><input type="text" name="latitude" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>市辖区:</td><td><input type="text" name="popedom" class="easyui-combobox popedom" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>门店图片:</td>
+	    			<td>
+                            <div id="updateImagePreview">
+                                <img id="updateImage"  width="200"  height="200">
+                            </div>
+                            <input type="file" name="file" onchange="PreviewImage(this,'updateImage','updateImagePreview')" /><br/>
+                       </td>
+	    		</tr>
+	    		<tr>
+	    			<td>试售价:</td><td><input type="text" name="tryPrice" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>门店状态:</td><td><input class="storeStatus" name="storeStatus" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    	</table>
+	    </form>
+	   <div id="ft2" style="padding: 5px; text-align: right;">
+                <a href="#" class="easyui-linkbutton" plian="true" icon="icon-ok" id="updateStoreSbmt" onclick="updateStore()">确定</a>
+                <a href="#" class="easyui-linkbutton" plian="true" icon="icon-ok" id="closeUpdateStoreSbmt" onclick="closeUpdateStoreWin()">取消</a>
+            </div>
+	</div>
+</body>
+<script type="text/javascript" src="/script/storeBigData/store.js"></script>
+</html>

@@ -1,0 +1,118 @@
+<#include "/include.htm">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>合作社规划</title>
+	<link rel="stylesheet" type="text/css" href="/css/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/css/moreIcons/IconExtension.css">
+	<link rel="stylesheet" type="text/css" href="/css/icon.css">
+	<link rel="stylesheet" type="text/css" href="/css/animate.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/iconfont/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="/css/rf.css">
+	<script type="text/javascript" src="/js/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/lib/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/js/lib/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="/js/plugin.js"></script>
+</head>
+<body>
+    <table id="cooperativesPlanGrid"></table>
+    <!-- 增加 -->
+	<div id="addCooperativesPlanWin" title="添加合作社规划数据" class="easyui-window" style="padding:5px;width:420px;height:350px;"data-options="closed:true,footer:'#ft1'">
+	    <form id="addCooperativesPlanForm" style="padding:10px 20px 10px 10px;text-align:center;">
+	    	<input type="text" name="id" class="hide">
+	    	<table>
+	    		<tr>
+	    			<td>种植(稻谷、小麦、猕猴桃):</td><td><input type="text" name="plant" class="easyui-textbox"  style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>规模（单位：亩）:</td><td><input type="text" name="scale" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>种值时间(单位：月）:</td><td><input type="text" name="plantDuration" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>投入预算:</td><td><input type="text" name="expectInvest" class="easyui-numberbox"  style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>产出预估（单位：吨）:</td><td><input type="text" name="expectOutput" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>收割时间（单位：月）:</td><td><input type="text" name="harvestTime" class="easyui-numberbox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>创建时间:</td><td><input type="text" name="createTime" class="easyui-datebox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td>合作社:</td><td><input class="easyui-textbox  cooperativesId" name="cooperativesId" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    	</table>
+	    </form>
+	    <div id="ft1" style="padding: 5px; text-align: right;">
+	    		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="addSave()">保存</a>&nbsp
+	    		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel"  onclick="addClose()">取消</a>
+	    </div>
+	    </div>
+	   
+	    
+
+	
+	<div id="cooperativesPlanGridToolBar"  >
+	<form id="queryForm">
+		<table >
+			<tr>
+				<td>
+					<span>合作社:<input class="easyui-textbox cooperativesId" name="cooperativesId"></span>
+				</td>		
+			</tr>
+			<tr>
+			<td>
+				<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-add"  onclick="add()">添加</a>
+				<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-edit" onclick="update()">修改</a>
+				<a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-cancel" onclick="del()">删除</a>
+				<a href="#" class="easyui-linkbutton" plain="true"  iconCls="icon-search" onclick="doSearch()">搜索</a>
+			</td>
+			</tr>
+		</table>
+	</form>
+	</div>
+	
+	<!-- 修改 -->
+	<div id="updateCooperativesPlanWin" title="修改合作社规划数据" class="easyui-window" style="padding:5px;width:420px;height:350px;"data-options="closed:true,footer:'#ft2'">
+	    <form id="updateCooperativesPlanForm" style="padding:10px 20px 10px 10px;text-align:center;">
+	    	<input type="text" name="id" class="hide">
+	    	<table>
+	    			<tr>
+	    			<td>种植(稻谷、小麦、猕猴桃):</td><td><input type="text" name="plant" class="easyui-textbox"  style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>规模（单位：亩）:</td><td><input type="text" name="scale" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>种值时间(单位：月）:</td><td><input type="text" name="plantDuration" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>投入预算:</td><td><input type="text" name="expectInvest" class="easyui-numberbox"  style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>产出预估（单位：吨）:</td><td><input type="text" name="expectOutput" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>收割时间（单位：月）:</td><td><input type="text" name="harvestTime" class="easyui-numberbox" style="width:180px"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>创建时间:</td><td><input type="text" name="createTime" class="easyui-datebox" style="width:180px" data-options="required:true" ></td>
+	    		</tr>
+	    		<tr>
+	    			<td><font style="color: red">合作社:</font></td><td><input class="easyui-textbox  cooperativesId" name="cooperativesId" style="width:180px" readonly="readonly"></td>
+	    		</tr>
+	    	</table>
+	    </form>
+	    <div id="ft2" style="padding: 5px; text-align: right;">
+	    		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-ok" onclick="updateSave() ">保存</a>&nbsp
+	    		<a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="updateClose()">取消</a>
+	    </div>
+	</div>    
+</body>
+<script type="text/javascript" src="/script/cooperativeDistribute/cooperativesPlan.js"></script>
+</html>

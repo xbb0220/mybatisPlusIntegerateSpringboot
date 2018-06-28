@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hywa.cors.mapper.MenuDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hywa.cors.entity.Menu">
+        <id column="id" property="id" />
+        <result column="text" property="text" />
+        <result column="iconCls" property="iconCls" />
+        <result column="url" property="url" />
+        <result column="parentId" property="parentId" />
+        <result column="position" property="position" />
+    </resultMap>
+
+    <select id="getMenuByUserIdAndParentId" resultType="com.hywa.cors.vo.MenuVo">
+        select menu.*
+	    from
+            (	select distinct menu.id
+                from user_role
+                left join role_menu
+                on role_menu.roleId=user_role.roleId
+                left join menu
+                on role_menu.menuId=menu.id
+                where user_role.userId=#{userId}) temMenu
+	    left join menu
+	    on temMenu.id=menu.id
+	    where 1=1
+        <choose>
+            <when test="parentId != null and parentId != ''">
+                and menu.parentId=#{parentId}
+            </when>
+            <otherwise>
+                and (length(menu.parentId)=0 or menu.parentId is null)
+            </otherwise>
+        </choose>
+    </select>
+    
+    <select id="getMenuByParentId" resultType="com.hywa.cors.vo.MenuVo">
+    		select menu.*
+	    from menu
+	    where 1=1
+	    <choose>
+            <when test="parentId != null and parentId != ''">
+                and menu.parentId=#{parentId}
+            </when>
+            <otherwise>
+                and (length(menu.parentId)=0 or menu.parentId is null)
+            </otherwise>
+        </choose>
+    </select>
+    
+    <select id="getFirstDegree" resultType="com.hywa.cors.vo.MenuVo">
+    		select * from menu 
+    		where  (LENGTH(parentId)=0 or parentId is null ) 
+    		order by position asc
+    </select>
+    
+    <select id="getByParentId" resultType="com.hywa.cors.vo.MenuVo">
+    		select * 
+    		from menu 
+    		where parentId = #{parentId} order by position asc
+    </select>
+    
+    <select id="getRoleMenuByParentId" resultType="com.hywa.cors.vo.MenuVo">
+    		select menu.text,menu.id,menu.iconCls,menu.parentId,
+    		case when (  select count(*) from role_menu  where roleId=#{roleId} and role_menu.menuId=menu.id) >0 then true else false end checked
+    		from menu
+    		<choose>
+            <when test="parentId != null and parentId != ''">
+            		where menu.parentId =#{parentId}  order by menu.position asc
+            </when>
+            <otherwise>
+				where LENGTH(menu.parentId)=0 or menu.parentId is null order by menu.position asc                
+            </otherwise>
+        </choose>
+    </select>
+    
+</mapper>
